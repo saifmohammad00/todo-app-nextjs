@@ -1,5 +1,6 @@
-import Link from 'next/link';
 import { useState } from 'react';
+import classes from "./TodoList.module.css";
+
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
@@ -32,7 +33,7 @@ const TodoList = () => {
   };
 
   return (
-    <div>
+    <div className={classes.todolist}>
       <h1>Todo List</h1>
       <form onSubmit={handleSubmit}>
         <input
@@ -43,7 +44,7 @@ const TodoList = () => {
         />
         <button type="submit">Add Todo</button>
       </form>
-      <ul>
+      <ul style={{listStyle:"none"}}>
         {todos.map((todo) => (
           <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
             <input
