@@ -1,0 +1,33 @@
+.todolist{
+    width: 50%;
+    margin: auto;
+    text-align: center;
+}
+.todolist li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 2px solid rgb(12, 12, 12);
+}
+.todolist li input {
+    transform: scale(2);
+}
+.todolist button{
+    background-color: rgb(60, 187, 219);
+    width: 100px;
+    height: 40px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.todolist form input{
+    border-radius: 5px;
+    height: 40px;
+    padding: 5px;
+    font-size: 20px;
+}

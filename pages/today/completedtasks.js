@@ -1,5 +1,7 @@
 
 function CompletedTasks(){
-    return <h1>Completed Tasks</h1>
+    return <div>
+        <h1>Completed Tasks</h1>
+    </div>
 }
 export default CompletedTasks;

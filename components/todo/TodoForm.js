@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import classes from "./TodoList.module.css";
+import TodoList from './TodoList';
 
 
-const TodoList = () => {
-  const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState('');
-
+const TodoForm = () => {
+  const [todos,setTodos]=useState([]);
+  const [newTodo,setNewTodo]=useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newTodo.trim() === '') return;
@@ -44,20 +44,8 @@ const TodoList = () => {
         />
         <button type="submit">Add Todo</button>
       </form>
-      <ul style={{listStyle:"none"}}>
-        {todos.map((todo) => (
-          <li key={todo.id} style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => handleToggle(todo.id)}
-            />
-            {todo.text}
-            <button onClick={() => handleDelete(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <TodoList data={todos} hToggle={handleToggle} hDelete={handleDelete}/>
     </div>
   );
 };
-export default TodoList;
+export default TodoForm;
