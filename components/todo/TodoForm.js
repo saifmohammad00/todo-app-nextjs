@@ -1,35 +1,19 @@
-import { useState } from 'react';
-import classes from "./TodoList.module.css";
-import TodoList from './TodoList';
+import { useRef } from 'react';
+import classes from "./TodoForm.module.css";
 
 
-const TodoForm = () => {
-  const [todos,setTodos]=useState([]);
-  const [newTodo,setNewTodo]=useState("");
+const TodoForm = (props) => {
+  const enteredTask=useRef();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newTodo.trim() === '') return;
+    if (enteredTask.current.value === '') return;
 
     const newTodoItem = {
-      id: Date.now(),
-      text: newTodo,
+      text: enteredTask.current.value,
       completed: false,
     };
-
-    setTodos((prevTodos) => [...prevTodos, newTodoItem]);
-    setNewTodo('');
-  };
-
-  const handleToggle = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
-
-  const handleDelete = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    props.onAddTask(newTodoItem);
+    enteredTask.current.value="";
   };
 
   return (
@@ -38,13 +22,11 @@ const TodoForm = () => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
+          ref={enteredTask}
           placeholder="Add a new todo"
         />
         <button type="submit">Add Todo</button>
       </form>
-      <TodoList data={todos} hToggle={handleToggle} hDelete={handleDelete}/>
     </div>
   );
 };
