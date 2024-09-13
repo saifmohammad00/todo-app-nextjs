@@ -18,14 +18,14 @@ const TodoForm = (props) => {
 
   return (
     <div className={classes.todolist}>
-      <h1>Todo List</h1>
+      <h1>Todo Form</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           ref={enteredTask}
           placeholder="Add a new todo"
         />
-        <button type="submit">Add Todo</button>
+        <button type="submit">Add Task</button>
       </form>
     </div>
   );

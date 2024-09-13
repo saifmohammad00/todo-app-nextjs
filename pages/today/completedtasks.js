@@ -1,41 +1,30 @@
-import Head from "next/head";
-import TodoList from "../../components/todo/TodoList";
 import { MongoClient } from "mongodb";
+import TodoCompleted from "../../components/todo/TodoCompleted";
 
-function CompletedTasks(props) {
-  return (
-    <div>
-      <Head>
-        <title>Completed Tasks</title>
-        <meta
-          name="description"
-          content="completed tasks"
-        />
-      </Head>
-      <h1>Completed Tasks</h1>
-      <TodoList todos={props.todos} />
+function CompletedTasks(props){
+    return <div>
+        <h1>Completed Tasks</h1>
+        <TodoCompleted todos={props.todos}/>
     </div>
-  );
 }
 export async function getStaticProps() {
-  const client = await MongoClient.connect(
-    "mongodb+srv://saifmohammad:Mongo1234@cluster0.9nfvk.mongodb.net/todos?retryWrites=true&w=majority&appName=Cluster0"
-  );
-  const db = client.db();
-  const todoscollection = db.collection("todos");
-  const todos = await todoscollection.find().toArray();
-  client.close();
-  return {
-    props: {
-      todos: todos
-        .filter((task) => task.completed === false)
-        .map((task) => ({
-          text: task.text,
-          completed: task.completed,
-          id: task._id.toString(),
+    const client = await MongoClient.connect(
+      "mongodb+srv://saifmohammad:Mongo1234@cluster0.9nfvk.mongodb.net/todos?retryWrites=true&w=majority&appName=Cluster0"
+    );
+    const db = client.db();
+    const todoscollection = db.collection("todos");
+    const todos = await todoscollection.find().toArray();
+    client.close();
+    return {
+      props: {
+        todos: todos.filter(task=>task.completed===true)
+        .map(task=>({
+          text:task.text,
+          completed:task.completed,
+          id:task._id.toString(),
         })),
-    },
-    revalidate: 1,
-  };
-}
+      },
+      revalidate: 1,
+    };
+  }
 export default CompletedTasks;

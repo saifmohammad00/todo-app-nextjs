@@ -2,11 +2,7 @@ import classes from "./TodoForm.module.css";
 
 function TodoList(props) {
   const handleToggle = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
+    props.handleToggle(id);
   };
 
   const handleDelete = (id) => {
