@@ -8,6 +8,7 @@ import Head from "next/head";
 function TodoApp(props) {
   const [value,setValue]=useState();
   const router = useRouter();
+
   async function addTaskHandler(enteredtaskData) {
     const response = await fetch("/api/todos", {
       method: "POST",
@@ -19,6 +20,7 @@ function TodoApp(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
+
   async function handleToggle(todo) {
     const response = await fetch("/api/todos", {
       method: "PUT",
@@ -30,6 +32,7 @@ function TodoApp(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
+
   async function handleUpdate(todo) {
     const response = await fetch("/api/edit", {
       method: "PUT",
@@ -41,6 +44,7 @@ function TodoApp(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
+
   async function handleDelete(id) {
     const response = await fetch("/api/todos", {
       method: "DELETE",
@@ -52,10 +56,12 @@ function TodoApp(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
+
   const edit=(todo)=>{
       setValue(todo);
       router.replace(router.asPath);
   }
+  
   return (
     <Fragment>
       <Head>
