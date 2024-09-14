@@ -41,6 +41,17 @@ function TodoApp(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
+  async function handleDelete(id) {
+    const response = await fetch("/api/todos", {
+      method: "DELETE",
+      body: JSON.stringify({id}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    router.replace(router.asPath);
+  }
   const edit=(todo)=>{
       setValue(todo);
       router.replace(router.asPath);
@@ -56,7 +67,7 @@ function TodoApp(props) {
       </Head>
       <TodoForm onAddTask={addTaskHandler} editValue={value} handleUpdate={handleUpdate} updateForm={()=>setValue("")}/>
       <h1 style={{marginLeft:"25rem"}}>Pending Tasks</h1>
-      <TodoList todos={props.todos} handleToggle={handleToggle} edit={edit}/>
+      <TodoList todos={props.todos} handleToggle={handleToggle} edit={edit} handleDelete={handleDelete}/>
     </Fragment>
   );
 }

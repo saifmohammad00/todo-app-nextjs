@@ -15,10 +15,21 @@ function CompletedTasks(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
+  async function handleDelete(id) {
+    const response = await fetch("/api/todos", {
+      method: "DELETE",
+      body: JSON.stringify({id}),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    router.replace(router.asPath);
+  }
   return (
     <div>
       <h1>Completed Tasks</h1>
-      <TodoCompleted todos={props.todos} handleToggle={handleToggle} />
+      <TodoCompleted todos={props.todos} handleToggle={handleToggle} handleDelete={handleDelete}/>
     </div>
   );
 }

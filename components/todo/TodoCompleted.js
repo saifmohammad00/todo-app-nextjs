@@ -6,7 +6,7 @@ function TodoCompleted(props) {
   }
 
   const handleDelete = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+    props.handleDelete(id);
   };
   return (
     <ul style={{ listStyle: "none" }} className={classes.todolist}>

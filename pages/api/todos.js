@@ -29,5 +29,20 @@ async function handler(req, res) {
     client.close();
     res.status(200).json(result);
   }
+  if (req.method === "DELETE") {
+    const data=req.body;
+    const {id}=data;
+    console.log(id);
+    const client = await MongoClient.connect(
+        "mongodb+srv://saifmohammad:Mongo1234@cluster0.9nfvk.mongodb.net/todos?retryWrites=true&w=majority&appName=Cluster0"
+    );
+    const db=client.db('todos');
+    const todosCollection = db.collection("todos");
+    const result = await todosCollection.deleteOne(
+      { _id: new ObjectId(id) },
+    );
+    client.close();
+    res.status(200).json(result);
+  }
 }
 export default handler;
