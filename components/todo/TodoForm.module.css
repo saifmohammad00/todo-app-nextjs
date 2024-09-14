@@ -1,34 +1,46 @@
-.todolist{
-    width: 50%;
-    margin: auto;
-    text-align: center;
-    margin-top: 1rem;
+.todolist {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  margin-top: 1rem;
 }
-.todolist li{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    font-size: 20px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 10px;
-    border: 2px solid rgb(12, 12, 12);
+.form{
+    text-align: center;
+}
+.form input {
+  border-radius: 5px;
+  height: 40px;
+  padding: 5px;
+  font-size: 20px;
+}
+.form button {
+  margin-left: 1rem;
+  background-color: rgb(60, 187, 219);
+  width: 80px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.todolist li {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-size: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 2px solid rgb(12, 12, 12);
 }
 .todolist li input {
-    transform: scale(2);
+  transform: scale(2);
+  margin-right: 1rem;
 }
-.todolist button{
-    background-color: rgb(60, 187, 219);
-    width: 100px;
-    height: 40px;
-    margin-left: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-.todolist form input{
-    border-radius: 5px;
-    height: 40px;
-    padding: 5px;
-    font-size: 20px;
+.todolist li button {
+  background-color: rgb(60, 187, 219);
+  width: 80px;
+  height: 40px;
+  margin-left: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }

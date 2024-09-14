@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useRef, useState } from "react";
 import { MongoClient } from "mongodb";
 import TodoForm from "../../components/todo/TodoForm";
 import TodoList from "../../components/todo/TodoList";
@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 function TodoApp(props) {
+  const [value,setValue]=useState();
   const router = useRouter();
   async function addTaskHandler(enteredtaskData) {
     const response = await fetch("/api/todos", {
@@ -18,10 +19,10 @@ function TodoApp(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
-  async function handleEdit(id) {
+  async function handleToggle(todo) {
     const response = await fetch("/api/todos", {
       method: "PUT",
-      body: JSON.stringify(id),
+      body: JSON.stringify(todo),
       headers: {
         "Content-Type": "application/json",
       },
@@ -29,7 +30,21 @@ function TodoApp(props) {
     const data = await response.json();
     router.replace(router.asPath);
   }
-  
+  async function handleUpdate(todo) {
+    const response = await fetch("/api/edit", {
+      method: "PUT",
+      body: JSON.stringify(todo),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const data = await response.json();
+    router.replace(router.asPath);
+  }
+  const edit=(todo)=>{
+      setValue(todo);
+      router.replace(router.asPath);
+  }
   return (
     <Fragment>
       <Head>
@@ -39,9 +54,9 @@ function TodoApp(props) {
           content="todays pending tasks"
         />
       </Head>
-      <TodoForm onAddTask={addTaskHandler} />
+      <TodoForm onAddTask={addTaskHandler} editValue={value} handleUpdate={handleUpdate} updateForm={()=>setValue("")}/>
       <h1 style={{marginLeft:"25rem"}}>Pending Tasks</h1>
-      <TodoList todos={props.todos} handleToggle={handleEdit}/>
+      <TodoList todos={props.todos} handleToggle={handleToggle} edit={edit}/>
     </Fragment>
   );
 }
